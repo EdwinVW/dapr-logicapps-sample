@@ -1,0 +1,19 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: vehicle-state-store
+  namespace: vehicle-registration
+spec:
+  type: state.azure.tablestorage
+  version: v1
+  metadata:
+  - name: accountName
+    secretKeyRef:
+      name: vra-secrets
+      key: accountName
+  - name: accountKey
+    secretKeyRef:
+      name: vra-secrets
+      key: accountKey
+  - name: tableName
+    value: vehicles

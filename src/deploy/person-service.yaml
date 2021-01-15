@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: person-service
+  namespace: vehicle-registration
+  labels:
+    app: person-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: person-service
+  template:
+    metadata:
+      labels:
+        app: person-service
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "person-service"
+        dapr.io/app-port: "5000"
+        dapr.io/log-level: debug
+    spec:
+      containers:
+      - name: host
+        image: vehicle-registration/personservice:1.0
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: IfNotPresent
+

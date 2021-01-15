@@ -1,0 +1,101 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            
+            "Store_Vehicle_Record": {
+                "type": "Http",
+                "inputs": {
+                    "method": "POST",
+                    "uri": "http://localhost:3500/v1.0/state/vehicle-state-store",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "@outputs('Create_Vehicle_Record')"
+                },
+                "runAfter": {
+                    "Create_Vehicle_Record": [
+                        "Succeeded"
+                    ]
+                }
+            },
+
+            "Response": {
+                "type": "Response",
+                "kind": "http",
+                "inputs": {
+                    "statusCode": 200,
+                    "body": ""
+                },
+                "runAfter": {
+                    "Store_Vehicle_Record": [
+                        "Succeeded"
+                    ]
+                }
+            },
+
+            "Create_Vehicle_Record": {
+                "type": "Compose",
+                "inputs": [
+                    {
+                        "key": "@triggerBody()?['licenseNumber']",
+                        "value": {
+                            "brand": "@triggerBody()?['brand']",
+                            "model": "@triggerBody()?['model']",
+                            "owner": {
+                                "id": "@body('Get_Owner_Info')?['id']",
+                                "name": "@body('Get_Owner_Info')?['name']",
+                                "email": "@body('Get_Owner_Info')?['email']"
+                            }
+                        }
+                    }
+                ],
+                "runAfter": {
+                    "Get_Owner_Info": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Get_Owner_Info": {
+                "type": "Http",
+                "inputs": {
+                    "method": "GET",
+                    "uri": "http://localhost:3500/v1.0/invoke/person-service/method/person",
+                    "queries": {
+                        "ownerId": "@triggerBody()?['ownerId']"
+                    }
+                },
+                "runAfter": {}
+            }
+        },
+
+        "triggers": {
+            "manual": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "licenseNumber": {
+                                "type": "string"
+                            },
+                            "brand": {
+                                "type": "string"
+                            },
+                            "model": {
+                                "type": "string"
+                            },
+                            "ownerId": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "contentVersion": "1.0.0.0",
+        "outputs": {}
+    }
+}

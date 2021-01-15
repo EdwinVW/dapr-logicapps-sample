@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-registration-app
+  namespace: vehicle-registration
+  labels:
+    app: vehicle-registration-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vehicle-registration-app
+  template:
+    metadata:
+      labels:
+        app: vehicle-registration-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "workflows"
+        dapr.io/app-protocol: "grpc"
+        dapr.io/app-port: "50003"
+        dapr.io/log-level: debug
+    spec:
+      containers:
+      - name: host
+        image: daprio/workflows:edge #0.2.2
+        env:
+        - name: STORAGE_ACCOUNT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: vra-secrets
+              key: accountKey
+        - name: STORAGE_ACCOUNT_NAME
+          valueFrom:
+            secretKeyRef:
+              name: vra-secrets
+              key: accountName
+        command: ["dotnet"]
+        args: ["app/Dapr.Workflows.dll", "--workflows-path", "/workflows"]
+        ports:
+        - containerPort: 50003
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: workflows
+          mountPath: /workflows
+      volumes:
+        - name: workflows
+          configMap:
+            name: vra-config

@@ -1,0 +1,1 @@
+docker build -t vehicle-registration/personservice:1.0 .
