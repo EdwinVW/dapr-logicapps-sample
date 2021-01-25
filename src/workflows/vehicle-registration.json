@@ -25,7 +25,7 @@
                 "kind": "http",
                 "inputs": {
                     "statusCode": 200,
-                    "body": ""
+                    "body": "@outputs('Create_Vehicle_Record')"
                 },
                 "runAfter": {
                     "Store_Vehicle_Record": [

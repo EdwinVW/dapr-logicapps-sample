@@ -4,7 +4,7 @@ POST http://localhost:3500/v1.0/invoke/workflows/method/vehicle-registration
 Content-Type: application/json
 
 {
-    "licenseNumber": "{{$randomInt 1 9}}-DPR-{{$randomInt 10 99}}",
+    "licenseNumber": "{{$randomInt 10 99}}-DPR-{{$randomInt 10 99}}",
     "brand": "Volkswagen",
     "model": "Golf",
     "ownerId": "{{$randomInt 11111111 99999999}}"

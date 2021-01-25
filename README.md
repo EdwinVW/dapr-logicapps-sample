@@ -67,4 +67,4 @@ These are the steps to take in order to start and test the application:
 
 1. Execute the request. You should receive a HTTP status-code `200 OK`.
 
-If you don't receive a `200 OK`, check the logging from the containers to see where the error occurred. You can also query the workflow state tables created in the Azure Storage account. You can find the result status for every individual activity in the workflow (in the table named `flow<flow-identifier>actions`).
+If you don't receive a response with HTTP status-code `200 OK` and the body of the vehicle record, check the logging from the containers to see where the error occurred. You can also query the workflow state tables created in the Azure Storage account. You can find the result status for every individual activity in the workflow (in the table named `flow<flow-identifier>actions`).
