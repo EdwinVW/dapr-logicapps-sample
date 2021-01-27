@@ -23,6 +23,9 @@ namespace PersonService.Controllers
         public Person GetOwnerInfo([FromQuery]string ownerId)
         {
             var name = _personGenerator.GenerateRandomFirstAndLastName();
+
+            _logger.LogInformation($"Retrieved information of {name}.");
+
             return new Person
             {
                 Id = ownerId,
