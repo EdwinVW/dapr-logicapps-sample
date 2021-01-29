@@ -1,6 +1,5 @@
-
 ### Invoke Vehicle Registration flow with randomized data
-POST http://localhost:3500/v1.0/invoke/workflows/method/vehicle-registration
+POST http://localhost:30000/v1.0/invoke/workflows/method/vehicle-registration
 Content-Type: application/json
 
 {

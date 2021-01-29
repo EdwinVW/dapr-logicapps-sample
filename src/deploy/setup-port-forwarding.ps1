@@ -1,1 +1,0 @@
-kubectl port-forward deploy/vehicle-registration-app 3500:3500 -n vehicle-registration

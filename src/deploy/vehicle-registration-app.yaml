@@ -47,3 +47,21 @@ spec:
         - name: workflows
           configMap:
             name: vra-config
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vehicle-registration-app
+  namespace: vehicle-registration
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  ports:
+  - name: dapr-http
+    port: 3500
+    targetPort: 3500
+    nodePort: 30000
+  selector:
+    app: vehicle-registration-app

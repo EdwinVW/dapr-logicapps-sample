@@ -3,14 +3,24 @@
 This is a sample app that uses Logic Apps with Dapr. The functionality is very simple. It's a simplified vehicle registration flow. You send a registration request to the application. It will call a service to get some information of the owner of the vehicle by his/her id that is part of the registration request. It then creates a registration record and stores is in a data store. Here's an overview of this flow:
 
 ![Data flow overview](img/flow-data.png)
-**Figure 1**: Data flow overview
+
+The *Get Owner Info* activity is an HTTP Activity with the following configuration:
+
+![image-20210129051401799](img/get-owner-info.png)
+
+The *Create Vehicle Record* activity is a Compose activity with the following configuration:
+
+![image-20210129051515599](img/create-vehicle-record.png)
+
+The *Store Vehicle Record* activity is an HTTP activity with the following configuration:
+
+![image-20210129051625039](img/store-vehicle-record.png)
 
 The application runs in Kubernetes. There is a dedicated container image (maintained by Microsoft) that contains a workflow host that can execute Logic Apps definitions. Dapr is enabled for the host, so a Dapr sidecar is added to its pod. The Dapr sidecar handles all the communication between the application and external resources. From the workflow it is very easy to call the Dapr APIs offered by the sidecar, because they can be called using simple HTTP requests. This is an description of how the application works technically:
 
 ![Technical architecture diagram](img/flow-overview.png)
-**Figure 2**: Technical architecture diagram
 
-1. When the application is started, the workflow host container will read the workflow definition and start a listener for it. It also registers the workflow in the workflow state-store. At this moment, it can only use an Azure Storage account. More options will become available in the future.
+When the application is started, the workflow host container will read the workflow definition and start a listener for it. It also registers the workflow in the workflow state-store. At this moment, it can only use an Azure Storage account. More options will become available in the future.
 
 1. A user sends an HTTP request to the Dapr sidecar of the workflow host. The payload is a vehicle registration request (see Figure 1 for the message schema).
 
@@ -57,9 +67,7 @@ These are the steps to take in order to start and test the application:
 1. Wait some time for the containers to come up. Use the command `kubectl get deployment -n vehicle-registration` to check this:
 
    ![Check for running deployments](img/deployments.png)
-   **Figure 3**: Check for running deployments
-
-1. Setup port forwarding by executing the `setup-port-forwarding.ps1` script.
+   
 
 1. Install the [`REST Client` extension for VS Code](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
