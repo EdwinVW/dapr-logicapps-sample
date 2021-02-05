@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vehicle-registration-app
-  namespace: vehicle-registration
+  name: workflowhost
+  namespace: dapr-logicapps-sample
   labels:
-    app: vehicle-registration-app
+    app: workflowhost
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vehicle-registration-app
+      app: workflowhost
   template:
     metadata:
       labels:
-        app: vehicle-registration-app
+        app: workflowhost
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "workflows"
@@ -53,8 +53,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vehicle-registration-app
-  namespace: vehicle-registration
+  name: workflowhost
+  namespace: dapr-logicapps-sample
 spec:
   type: NodePort
   externalTrafficPolicy: Local
@@ -64,4 +64,4 @@ spec:
     targetPort: 3500
     nodePort: 30000
   selector:
-    app: vehicle-registration-app
+    app: workflowhost

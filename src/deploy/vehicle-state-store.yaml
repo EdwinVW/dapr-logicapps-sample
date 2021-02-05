@@ -2,7 +2,7 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: vehicle-state-store
-  namespace: vehicle-registration
+  namespace: dapr-logicapps-sample
 spec:
   type: state.azure.tablestorage
   version: v1

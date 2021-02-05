@@ -64,11 +64,10 @@ These are the steps to take in order to start and test the application:
 
 1. Run the application by executing the `start.ps1` script.
 
-1. Wait some time for the containers to come up. Use the command `kubectl get deployment -n vehicle-registration` to check this:
+1. Wait some time for the containers to come up. Use the command `kubectl get deployment -n dapr-logicapps-sample` to check this:
 
    ![Check for running deployments](img/deployments.png)
    
-
 1. Install the [`REST Client` extension for VS Code](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
 
 1. Open the file `/src/requests/register-vehicle.http`.
@@ -76,3 +75,4 @@ These are the steps to take in order to start and test the application:
 1. Execute the request. You should receive a HTTP status-code `200 OK`.
 
 If you don't receive a response with HTTP status-code `200 OK` and the body of the vehicle record, check the logging from the containers to see where the error occurred. You can also query the workflow state tables created in the Azure Storage account. You can find the result status for every individual activity in the workflow (in the table named `flow<flow-identifier>actions`).
+

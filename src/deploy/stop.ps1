@@ -1,6 +1,6 @@
-kubectl delete -f vehicle-registration-app.yaml
+kubectl delete -f workflowhost.yaml
 kubectl delete -f person-service.yaml
 kubectl delete -f vehicle-state-store.yaml
-kubectl delete configmap vra-config -n vehicle-registration
-kubectl delete secret vra-secrets -n vehicle-registration
-#kubectl delete namespace vehicle-registration
+kubectl delete configmap vra-config -n dapr-logicapps-sample
+kubectl delete secret vra-secrets -n dapr-logicapps-sample
+#kubectl delete namespace dapr-logicapps-sample

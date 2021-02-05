@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: person-service
-  namespace: vehicle-registration
+  namespace: dapr-logicapps-sample
   labels:
     app: person-service
 spec:

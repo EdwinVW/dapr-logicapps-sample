@@ -5,5 +5,5 @@ kubectl apply -f namespace.yaml
 
 kubectl apply -f vehicle-state-store.yaml
 kubectl apply -f person-service.yaml
-kubectl apply -f vehicle-registration-app.yaml
+kubectl apply -f workflowhost.yaml
 
