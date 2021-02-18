@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "./deploy"
+		},
+		{
+			"path": "./PersonService"
+		},
+		{
+			"path": "./requests"
+		},
+		{
+			"path": "./Workflows"
+		}
+	],
+	"settings": {}
+}
