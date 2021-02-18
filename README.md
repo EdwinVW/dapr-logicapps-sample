@@ -38,10 +38,11 @@ When the application is started, the workflow host container will read the workf
 
 To start the application, make sure the following prerequisites are met:
 
-- You are working in VS Code.
-- You have Docker Desktop installed with Kubernetes enabled.
-- You have basic knowledge of working with Docker containers and Kubernetes.
+- You have installed VS Code.
+- You have installed Docker Desktop with Kubernetes enabled.
+- You have installed the Azure CLI.
 - You have access to an Azure Storage account.
+- You have basic knowledge of working with Docker containers and Kubernetes.
 
 These are the steps to take in order to start and test the application:
 
@@ -49,7 +50,7 @@ These are the steps to take in order to start and test the application:
 
 1. Go to the `/src/PersonService` folder.
 
-1. Build the **PersonService** docker image by executing the `build-docker-images.ps1` script.
+1. Build the **PersonService** docker image by executing the `build-docker-image.ps1` script.
 
 1. Create an (or reuse an existing) Azure Storage account. Retrieve the account name and access key.
 
