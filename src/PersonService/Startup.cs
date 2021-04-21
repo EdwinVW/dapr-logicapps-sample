@@ -29,8 +29,6 @@ namespace PersonService
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
